@@ -1,0 +1,9 @@
+{
+  "name": "UrgentHelp — a little room to choose",
+  "short_name": "UrgentHelp",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f5ef",
+  "theme_color": "#24332f",
+  "description": "A private, no-sign-in pause for managing an unwanted sexual urge with care and choice."
+}

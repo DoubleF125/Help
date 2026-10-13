@@ -5,6 +5,7 @@
 <style>.breath-ring{background:conic-gradient(from -90deg,#b8d8c7 0 25%,#c8d9c7 25% 50%,#acd0cc 50% 75%,#c9c2d8 75% 100%)}.breath-orbit{animation:orbit 16s linear infinite paused}@keyframes orbit{0%{transform:rotate(0deg)}25%{transform:rotate(90deg)}50%{transform:rotate(180deg)}75%{transform:rotate(270deg)}100%{transform:rotate(360deg)}}</style>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <script>document.addEventListener('DOMContentLoaded',()=>{const b=document.getElementById('breathStart');if(b)b.onclick=()=>{if(window.breathRunning||window.interval)return;window.resetTimer();window.breathCountdownTimer=null;b.disabled=true;b.style.display='none';window.startBreathing();window.startTimer();b.disabled=false}})</script>
+<style>.hero h1,.hero p{display:none}</style>
 <title>UrgentHelp — a little room to choose</title>
 <link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#24332f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="UrgentHelp">
 <meta name="description" content="A private, no-sign-in pause for managing an unwanted sexual urge with care and choice.">

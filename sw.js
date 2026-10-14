@@ -1,4 +1,4 @@
-const CACHE = 'urgenthelp-v5';
+const CACHE = 'urgenthelp-v6';
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['/', '/index.html', '/manifest.webmanifest', '/app-icon.svg', '/pwa.js', '/feedback.js'])));
   self.skipWaiting();

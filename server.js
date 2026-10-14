@@ -29,7 +29,7 @@ function decoratePage(html, page) {
   if (page >= 4) result = result.replace('</head>', '<style>html.blank-forward body>*{display:none!important}</style></head>');
   if (page === 5) {
     const gallery = `<main class="page-five-gallery"><h1>A little sky, a little joy</h1><div class="page-five-grid"><figure><img src="/page5-photo-1.jpg" alt="Clouds with a pink heart"></figure><figure><img src="/page5-photo-5.png" alt="Bare tree branches"></figure><figure><img src="/page5-photo-6.png" alt="Trees in the fog"></figure><figure><img src="/page5-photo-7.png" alt="Pink evening sky"></figure></div></main>`;
-    result = result.replace(/<body>[\s\S]*?<\/body>/i, `<body>${pageFiveCss}${gallery}</body>`);
+    result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, `<body>${pageFiveCss}${gallery}</body>`);
   } else {
     result = result.replace('</head>', '<style>html,body{overflow-x:hidden}@media(max-width:700px){html,body{height:auto!important;min-height:100%;overflow-y:auto!important}main{height:auto!important;min-height:0!important;overflow:visible!important;padding-bottom:110px!important}.toprow .steps{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:3px!important}.toprow .steps .step{padding:5px 2px!important;min-width:0!important}.toprow .steps .step strong{font-size:9px!important}.toprow .steps .step span{font-size:7px!important;line-height:1.05!important}}</style></head>');
     result = result.replace('</body>', '<script src="/feedback.js?v=4"></script><script src="/pwa.js?v=2"></script><script src="/streak.js?v=1"></script></body>');

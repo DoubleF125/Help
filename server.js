@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 10000;
 const pool = process.env.DATABASE_URL ? new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } }) : null;
 app.use(express.json({ limit: '1mb' }));
-app.get('/', (req, res) => { const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8').replace('</body>', '<script src="/feedback.js"></script></body>'); res.type('html').send(html); });
+app.get('/', (req, res) => { const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8').replace(/<\/body>/i, '<script src="/feedback.js?v=1"></script></body>'); res.set('Cache-Control', 'no-store'); res.type('html').send(html); });
 app.use(express.static(__dirname));
 async function initDb() { if (!pool) return; await pool.query(`CREATE TABLE IF NOT EXISTS feedback (id BIGSERIAL PRIMARY KEY, message TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())`); }
 app.post('/api/feedback', async (req, res) => { const message = typeof req.body?.message === 'string' ? req.body.message.trim() : ''; if (!message) return res.status(400).json({ error: 'Please enter feedback.' }); if (!pool) return res.status(503).json({ error: 'Feedback storage is not configured yet.' }); try { await pool.query('INSERT INTO feedback (message) VALUES ($1)', [message]); res.status(201).json({ ok: true }); } catch (error) { console.error(error); res.status(500).json({ error: 'Unable to save feedback right now.' }); } });

@@ -1,0 +1,15 @@
+const path = require('path');
+const fs = require('fs');
+const express = require('express');
+const { Pool } = require('pg');
+const app = express();
+const port = process.env.PORT || 10000;
+const pool = process.env.DATABASE_URL ? new Pool({ connectionString: process.env.DATABASE_URL, ssl: { rejectUnauthorized: false } }) : null;
+app.use(express.json({ limit: '1mb' }));
+app.get('/', (req, res) => { const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8').replace('</body>', '<script src="/feedback.js"></script></body>'); res.type('html').send(html); });
+app.use(express.static(__dirname));
+async function initDb() { if (!pool) return; await pool.query(`CREATE TABLE IF NOT EXISTS feedback (id BIGSERIAL PRIMARY KEY, message TEXT NOT NULL, created_at TIMESTAMPTZ NOT NULL DEFAULT NOW())`); }
+app.post('/api/feedback', async (req, res) => { const message = typeof req.body?.message === 'string' ? req.body.message.trim() : ''; if (!message) return res.status(400).json({ error: 'Please enter feedback.' }); if (!pool) return res.status(503).json({ error: 'Feedback storage is not configured yet.' }); try { await pool.query('INSERT INTO feedback (message) VALUES ($1)', [message]); res.status(201).json({ ok: true }); } catch (error) { console.error(error); res.status(500).json({ error: 'Unable to save feedback right now.' }); } });
+app.post('/api/admin/login', (req, res) => { const { email, password } = req.body || {}; if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) return res.json({ ok: true, token: process.env.ADMIN_PASSWORD }); res.status(401).json({ error: 'Invalid admin credentials.' }); });
+app.get('/api/admin/feedback', async (req, res) => { if (!process.env.ADMIN_PASSWORD || req.get('x-admin-token') !== process.env.ADMIN_PASSWORD) return res.status(401).json({ error: 'Unauthorized.' }); if (!pool) return res.status(503).json({ error: 'Feedback storage is not configured yet.' }); try { const result = await pool.query('SELECT id, message, created_at FROM feedback ORDER BY created_at DESC'); res.json(result.rows); } catch (error) { console.error(error); res.status(500).json({ error: 'Unable to load feedback right now.' }); } });
+initDb().then(() => app.listen(port, () => console.log(`HelpMeNow listening on ${port}`))).catch(error => { console.error(error); process.exit(1); });

@@ -1,6 +1,6 @@
-const CACHE = 'urgenthelp-v3';
+const CACHE = 'urgenthelp-v4';
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['/', '/index.html', '/manifest.webmanifest'])));
+  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['/', '/index.html', '/manifest.webmanifest', '/app-icon.svg', '/pwa.js', '/feedback.js'])));
   self.skipWaiting();
 });
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));

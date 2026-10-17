@@ -20,6 +20,7 @@ const pageFiveCss = `<style>
 @media(max-width:700px){.page-five-gallery{padding:18px 12px 28px}.page-five-gallery h1{font-size:32px;margin-bottom:18px}.page-five-grid{gap:0 8px}.page-five-grid figure{margin:-10px;padding:6px;border-radius:15px}.page-five-grid img{height:190px;border-radius:10px}.page-five-grid figure:before{width:34px;height:10px;top:-4px}.page-five-grid figure:hover{transform:rotate(0deg) scale(1.02)}}
 .page-five-next{display:block;margin:28px auto 0;border:0;border-radius:999px;padding:13px 32px;background:#24332f;color:#fff;font-size:17px;font-weight:800;cursor:pointer}
 .site-home-icon{position:fixed;top:20px;left:24px;z-index:50;width:48px;height:48px;border-radius:14px;background:#ed9275;color:#24332f;text-decoration:none;display:grid;place-items:center;font-size:28px;font-weight:800;box-shadow:0 8px 18px #24332f25}
+.page-number-label{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:50;border-top:1px solid #24332f55;padding:5px 22px 0;color:#24332f99;font-size:11px;letter-spacing:.08em}
 </style>`;
 
 function decoratePage(html, page) {
@@ -35,7 +36,7 @@ function decoratePage(html, page) {
     result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, `<body>${pageFiveCss}${gallery}</body>`);
   } else {
     result = result.replace('</head>', '<style>html,body{overflow-x:hidden}@media(max-width:700px){html,body{height:auto!important;min-height:100%;overflow-y:auto!important}main{height:auto!important;min-height:0!important;overflow:visible!important;padding-bottom:110px!important}.toprow .steps{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:3px!important}.toprow .steps .step{padding:5px 2px!important;min-width:0!important}.toprow .steps .step strong{font-size:9px!important}.toprow .steps .step span{font-size:7px!important;line-height:1.05!important}}</style></head>');
-    result = result.replace('</body>', '<script src="/feedback.js?v=4"></script><script src="/pwa.js?v=2"></script><script src="/streak.js?v=1"></script></body>');
+    result = result.replace('</body>', `<div class="page-number-label">Page ${page || 1}</div><script src="/feedback.js?v=4"></script><script src="/pwa.js?v=2"></script><script src="/streak.js?v=1"></script></body>`);
     if (page > 1) result = result.replace('</body>', '<a class="site-home-icon" href="/" aria-label="Homepage">↗</a><script>setInterval(function(){if(!document.querySelector(".site-home-icon")){var a=document.createElement("a");a.className="site-home-icon";a.href="/";a.setAttribute("aria-label","Homepage");a.textContent="↗";document.body.appendChild(a)}},100)</script></body>');
   }
   return result;

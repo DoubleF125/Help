@@ -8,6 +8,10 @@
     if (document.querySelector('.page-number-label')) return;
     var label = document.createElement('div'); label.className = 'page-number-label'; label.textContent = 'Page ' + (Number(page) || 1); document.body.appendChild(label);
   }
+  function ensurePageNumber() {
+    if (document.querySelector('.page-number-label')) return;
+    var label = document.createElement('div'); label.className = 'page-number-label'; label.textContent = 'Page ' + (Number(page) || 1); document.body.appendChild(label);
+  }
   if (page === '6') {
     document.addEventListener('DOMContentLoaded', function () { document.body.replaceChildren(); ensureHomeIcon(); ensurePageNumber(); setInterval(function(){ensureHomeIcon();ensurePageNumber()}, 100); });
     return;
@@ -19,6 +23,7 @@
   var css = document.createElement('style');
   css.textContent += '.page-number-label{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:50;border-top:1px solid #24332f55;padding:5px 22px 0;color:#24332f99;font-size:11px;letter-spacing:.08em}';
   document.head.appendChild(css);
+  var pageStyle = document.createElement('style'); pageStyle.textContent = '.page-number-label{position:fixed;bottom:8px;left:50%;transform:translateX(-50%);z-index:50;border-top:1px solid #24332f55;padding:5px 22px 0;color:#24332f99;font-size:11px;letter-spacing:.08em}'; document.head.appendChild(pageStyle);
   document.addEventListener('DOMContentLoaded', function () {
     var main = document.createElement('main');
     main.className = 'static-page-five';

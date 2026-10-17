@@ -31,6 +31,11 @@ function decoratePage(html, page) {
     .replace('<span>Made for choice, not shame.</span>', '');
   if (page >= 4) result = result.replace('</head>', '<style>html.blank-forward body>*{display:none!important}</style></head>');
   if (page >= 6) result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, '<body></body>');
+  if (page === 4 || page === 5) {
+    result = result.replace('</head>', '<style>.placeholder-page{min-height:100vh;display:grid;place-items:center;padding:24px;box-sizing:border-box;text-align:center;color:#24332f}.placeholder-page p{font:italic clamp(28px,5vw,54px) Georgia,serif}</style></head>');
+    result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, `<body><a class="site-home-icon" href="/" aria-label="Homepage">↗</a><main class="placeholder-page"><p>add your own pictures for motivation here</p></main><div class="page-number-label">Page ${page}</div></body>`);
+    return result;
+  }
   if (page === 5) {
     const gallery = `<a class="site-home-icon" href="/" aria-label="Homepage">↗</a><main class="page-five-gallery"><h1>A little sky, a little joy</h1><div class="page-five-grid"><figure><img src="/page5-photo-1.jpg" alt="Clouds with a pink heart"></figure><figure><img src="/page5-photo-5.png" alt="Bare tree branches"></figure><figure><img src="/page5-photo-6.png" alt="Trees in the fog"></figure><figure><img src="/page5-photo-7.png" alt="Pink evening sky"></figure></div><button class="page-five-next" onclick="location.href=location.pathname+'?page=6'">Next</button></main><script>setInterval(function(){document.querySelectorAll("button").forEach(function(b){if(b.textContent.trim()==="Skip")b.remove()})},100)</script>`;
     result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, `<body>${pageFiveCss}${gallery}</body>`);

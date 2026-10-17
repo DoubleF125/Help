@@ -28,6 +28,7 @@ function decoratePage(html, page) {
     .replace(/<section class="card" style="margin-top:18px">[\s\S]*?<\/section>/, '')
     .replace('<span>Made for choice, not shame.</span>', '');
   if (page >= 4) result = result.replace('</head>', '<style>html.blank-forward body>*{display:none!important}</style></head>');
+  if (page >= 6) result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, '<body></body>');
   if (page === 5) {
     const gallery = `<main class="page-five-gallery"><h1>A little sky, a little joy</h1><div class="page-five-grid"><figure><img src="/page5-photo-1.jpg" alt="Clouds with a pink heart"></figure><figure><img src="/page5-photo-5.png" alt="Bare tree branches"></figure><figure><img src="/page5-photo-6.png" alt="Trees in the fog"></figure><figure><img src="/page5-photo-7.png" alt="Pink evening sky"></figure></div><button class="page-five-next" onclick="location.href=location.pathname+'?page=6'">Next</button></main>`;
     result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, `<body>${pageFiveCss}${gallery}</body>`);

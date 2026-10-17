@@ -1,11 +1,15 @@
 (function () {
   var page = new URLSearchParams(location.search).get('page');
+  function ensureHomeIcon() {
+    if (Number(page) <= 1 || document.querySelector('.site-home-icon')) return;
+    var home = document.createElement('a'); home.className = 'site-home-icon'; home.href = '/'; home.setAttribute('aria-label', 'Homepage'); home.textContent = '↗'; document.body.appendChild(home);
+  }
   if (page === '6') {
-    document.addEventListener('DOMContentLoaded', function () { document.body.replaceChildren(); });
+    document.addEventListener('DOMContentLoaded', function () { document.body.replaceChildren(); ensureHomeIcon(); setInterval(ensureHomeIcon, 100); });
     return;
   }
   if (page !== '5') {
-    if (Number(page) > 1) document.addEventListener('DOMContentLoaded', function () { var home = document.createElement('a'); home.className = 'site-home-icon'; home.href = '/'; home.setAttribute('aria-label', 'Homepage'); home.textContent = '↗'; document.body.appendChild(home); });
+    if (Number(page) > 1) document.addEventListener('DOMContentLoaded', function () { ensureHomeIcon(); setInterval(ensureHomeIcon, 100); });
     return;
   }
   var css = document.createElement('style');
@@ -14,7 +18,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     var main = document.createElement('main');
     main.className = 'static-page-five';
-    var home = document.createElement('a'); home.className = 'site-home-icon'; home.href = '/'; home.setAttribute('aria-label', 'Homepage'); home.textContent = '↗'; document.body.appendChild(home);
+    ensureHomeIcon(); setInterval(ensureHomeIcon, 100);
     main.innerHTML = '<h1>A little sky, a little joy</h1><div class="static-page-five-grid"><figure><img src="/page5-photo-1.jpg" alt="Clouds with a pink heart"></figure><figure><img src="/page5-photo-5.png" alt="Bare tree branches"></figure><figure><img src="/page5-photo-6.png" alt="Trees in the fog"></figure><figure><img src="/page5-photo-7.png" alt="Pink evening sky"></figure></div><button class="static-page-five-next" onclick="location.href=location.pathname+\'?page=6\'">Next</button>';
     document.body.replaceChildren(main);
   });

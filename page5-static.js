@@ -21,5 +21,6 @@
     ensureHomeIcon(); setInterval(ensureHomeIcon, 100);
     main.innerHTML = '<h1>A little sky, a little joy</h1><div class="static-page-five-grid"><figure><img src="/page5-photo-1.jpg" alt="Clouds with a pink heart"></figure><figure><img src="/page5-photo-5.png" alt="Bare tree branches"></figure><figure><img src="/page5-photo-6.png" alt="Trees in the fog"></figure><figure><img src="/page5-photo-7.png" alt="Pink evening sky"></figure></div><button class="static-page-five-next" onclick="location.href=location.pathname+\'?page=6\'">Next</button>';
     document.body.replaceChildren(main);
+    setInterval(function () { document.querySelectorAll('button').forEach(function (button) { if (button.textContent.trim() === 'Skip') button.remove(); }); }, 100);
   });
 }());

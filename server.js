@@ -36,6 +36,10 @@ function decoratePage(html, page) {
     result = result.replace(/<body[^>]*>[\s\S]*?<\/body>/i, `<body>${pageFiveCss}${gallery}</body>`);
   } else {
     result = result.replace('</head>', '<style>html,body{overflow-x:hidden}@media(max-width:700px){html,body{height:auto!important;min-height:100%;overflow-y:auto!important}main{height:auto!important;min-height:0!important;overflow:visible!important;padding-bottom:110px!important}.toprow .steps{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:3px!important}.toprow .steps .step{padding:5px 2px!important;min-width:0!important}.toprow .steps .step strong{font-size:9px!important}.toprow .steps .step span{font-size:7px!important;line-height:1.05!important}}</style></head>');
+    if (page >= 2 && page <= 4) {
+      result = result.replace('</head>', '<style>html.page-transition-pending body>*{visibility:hidden!important}</style><script>document.documentElement.classList.add("page-transition-pending")</script></head>');
+      result = result.replace('</body>', '<script>document.addEventListener("DOMContentLoaded",function(){document.documentElement.classList.remove("page-transition-pending")})</script></body>');
+    }
     result = result.replace('</body>', `<div class="page-number-label">Page ${page || 1}</div><script src="/feedback.js?v=4"></script><script src="/pwa.js?v=2"></script><script src="/streak.js?v=1"></script></body>`);
     if (page > 1) result = result.replace('</body>', '<a class="site-home-icon" href="/" aria-label="Homepage">↗</a><script>setInterval(function(){if(!document.querySelector(".site-home-icon")){var a=document.createElement("a");a.className="site-home-icon";a.href="/";a.setAttribute("aria-label","Homepage");a.textContent="↗";document.body.appendChild(a)}},100)</script></body>');
   }

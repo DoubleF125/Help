@@ -133,6 +133,45 @@ html,body{width:100%;max-width:100%;overflow:hidden!important}
   .modalbox{width:84vw!important;max-width:84vw!important;padding:20px 18px!important}
   .modalbox h2{font-size:clamp(21px,6vw,30px)!important}
 }
+</style><style id="mobile-ui-polish">
+@media (max-width:700px){
+  body.page-one main,body.page-two main{
+    transform:scale(.72)!important;
+    transform-origin:top center!important;
+    width:138.89%!important;
+    margin-left:-19.445%!important;
+    padding:14px 16px 24px!important;
+  }
+  body.page-one .toprow,body.page-two .toprow{gap:14px!important}
+  body.page-one .breath-visual,body.page-two .breath-visual{width:min(260px,30vw)!important;height:min(260px,30vw)!important}
+  body.page-one .card,body.page-two .card{border-radius:22px!important}
+  body.page-one .footer,body.page-two .footer{margin-top:12px!important}
+  html.page-four-route .page-four-screen{
+    position:fixed!important;inset:0!important;
+    display:flex!important;flex-direction:column!important;
+    align-items:center!important;justify-content:space-between!important;
+    width:100vw!important;height:100svh!important;
+    padding:18px 12px 58px!important;
+    overflow:hidden!important;text-align:center!important;
+  }
+  html.page-four-route .page-four-screen h1{
+    display:block!important;width:100%!important;
+    margin:0!important;text-align:center!important;
+    font-size:clamp(32px,9vw,48px)!important;
+    line-height:1!important;
+  }
+  html.page-four-route .page-four-screen img{
+    display:block!important;width:min(78vw,360px)!important;
+    height:min(62svh,430px)!important;
+    max-width:78vw!important;max-height:62svh!important;
+    margin:auto!important;object-fit:contain!important;
+    border-width:6px!important;border-radius:18px!important;
+  }
+  html.page-four-route .page-four-screen button{
+    position:static!important;transform:none!important;
+    margin:0 auto!important;padding:10px 24px!important;
+  }
+}
 </style></head><body><style>.page-three-image{display:none;width:min(760px,calc(100vw - 32px));max-height:46vh;object-fit:cover;margin:4vh auto 0;border-radius:18px;border:1px solid var(--line);box-shadow:0 12px 30px #24140a33}.page-three .page-three-image{display:block!important}@media(max-width:700px){.page-three-image{width:calc(100vw - 24px);margin-top:2vh;max-height:36vh;border-radius:14px}}</style><script>document.addEventListener("DOMContentLoaded",function(){if(new URLSearchParams(location.search).get("page")!=="99")return;var image=document.createElement("img");image.className="page-three-image";image.src="/page-three-image.png";image.alt="A red-haired woman resting with a fox among autumn leaves";var games=document.querySelector(".page-three-games");if(games)games.parentNode.insertBefore(image,games)})</script><main><header><div class="brand"><span class="mark">↗</span>right now</div><div class="privacy">No sign-in · nothing saved</div></header>
 <div class="breath-start"><button onclick="beginBreathing()" id="breathStart">Start breathing</button><span class="countdown" id="breathCountdown" aria-live="polite"></span></div><div class="breath-visual" id="breathVisual" role="img" aria-label="Box breathing visual"><div class="breath-ring"><div class="breath-orb"><div class="breath-orbit"><span class="breath-ball"></span></div></div><span class="breath-label" id="breathLabel">Ready</span></div></div><section class="hero"><div class="eyebrow">A pause, not a battle</div><h1>You can feel an urge without having to follow it.</h1><p>Sexual feelings are human. If this one is unwanted or badly timed, take two minutes to make a little room around it and choose your next move.</p><button class="primary" onclick="startNow()">Help me now <span class="arrow">→</span></button><div class="notice"><span class="dot"></span><span>This won’t erase the feeling or promise a quick fix. It’s a private reset you can use on your terms.</span></div></section>
 <img class="page-two-image" src="/spiderman.png" alt="Spider-Man illustration"><section class="page-two-links" aria-label="Optional guided videos"><h2>Optional guided videos</h2><p>Choose any short practice that feels supportive right now.</p><ul><li><a href="https://www.youtube.com/watch?v=aA9CLENWJww&ab_channel=RosalieYoga" target="_blank" rel="noopener noreferrer">Video 1</a></li><li><a href="https://www.youtube.com/watch?v=8VZNMdCcxyU&ab_channel=RosalieYoga" target="_blank" rel="noopener noreferrer">Video 2</a></li><li><a href="https://www.youtube.com/watch?v=OtAi2Sygz7I&ab_channel=RosalieYoga" target="_blank" rel="noopener noreferrer">Video 3</a></li><li><a href="https://www.youtube.com/watch?v=WS2eQDXT6b0&ab_channel=RosalieYoga" target="_blank" rel="noopener noreferrer">Video 4</a></li><li><a href="https://www.youtube.com/watch?v=264XMU8hzBo&ab_channel=RosalieYoga" target="_blank" rel="noopener noreferrer">Video 5</a></li></ul></section><section class="grid"><article class="card" id="grounding"><h2>Two-minute reset</h2><p>Let your body settle before you decide what to do.</p><div class="timer"><div class="circle" id="circle"><div class="fluid" id="fluid"></div><div class="time" id="time">2:00</div></div><div><div class="timer-actions"><button class="small accent" onclick="toggleTimer()" id="timerBtn">Start timer</button><button class="small" onclick="resetTimer()">Reset</button></div></p><p style="margin-top:12px;font-size:14px"><strong>Starts automatically with breathing.</strong><br>Breathe in gently for 4. Out for 4. No need to do it perfectly.</p></div></div><div class="steps"><div class="step"><div class="num">1</div><div><strong>Notice</strong><span>“This is an urge. It is not an instruction.”</span></div></div><div class="step"><div class="num">2</div><div><strong>Soften</strong><span>Unclench your jaw. Drop your shoulders. Feel your feet.</span></div></div><div class="step"><div class="num">3</div><div><strong>Choose</strong><span>Ask: what would support me for the next ten minutes?</span></div></div></div></article>
